@@ -7,18 +7,26 @@ export function startExitCallback(callback)
 {
   function _eventHandler(e)
   {
-    const from = e.relatedTarget || e.toElement;
-    if(!from || from.nodeName === 'HTML')
+    if(
+      (e.x > 20) && (e.x < (window.innerWidth - 20))
+      && (e.y > 20) && (e.y < (window.innerHeight - 20))
+    )
     {
-      document.removeEventListener('mouseleave', _eventHandler);
+      return;
+    }
+
+    const to = e.relatedTarget || e.toElement;
+    if(!to)
+    {
+      document.removeEventListener('mouseout', _eventHandler);
       callback(prepare);
     }
   }
 
   function prepare()
   {
-    document.removeEventListener('mouseleave', _eventHandler);
-    document.addEventListener('mouseleave', _eventHandler);
+    document.removeEventListener('mouseout', _eventHandler);
+    document.addEventListener('mouseout', _eventHandler);
   }
 
   prepare();

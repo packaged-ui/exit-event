@@ -1,33 +1,52 @@
-/**
- * Execute (callback) when the cursor exit the page, or the user changes window focus
- *
- * @param {function} callback
- */
-export function startExitCallback(callback)
+const CustomEvent = require('custom-event');
+
+let lastUpdate = 0;
+let lastX, lastY = 0;
+document.addEventListener('mousemove', (e) =>
 {
-  function _eventHandler(e)
+  if(e.movementX || e.movementY)
   {
-    if(
-      (e.x > 20) && (e.x < (window.innerWidth - 20))
-      && (e.y > 20) && (e.y < (window.innerHeight - 20))
-    )
+    lastUpdate = Date.now();
+    lastX = e.x;
+    lastY = e.y;
+  }
+});
+
+let threshold = 60;
+
+document.addEventListener(
+  'mouseout',
+  (movedEvent) =>
+  {
+    const delay = Date.now() - lastUpdate;
+    if(delay === 0 || delay > 50)
     {
       return;
     }
 
-    const to = e.relatedTarget || e.toElement;
-    if(!to)
+    const location = [];
+    if(movedEvent.x < threshold)
     {
-      document.removeEventListener('mouseout', _eventHandler);
-      callback(prepare);
+      location.push('left');
+    }
+    if(movedEvent.x > (window.innerWidth - threshold))
+    {
+      location.push('right');
+    }
+    if(movedEvent.y < threshold)
+    {
+      location.push('top');
+    }
+    if(movedEvent.y > (window.innerHeight - threshold))
+    {
+      location.push('bottom');
+    }
+
+    const to = movedEvent.relatedTarget || movedEvent.toElement;
+    if((location.length > 0) && (!to))
+    {
+      const event = new CustomEvent('document-exit', {detail: {positions: location}});
+      document.dispatchEvent(event)
     }
   }
-
-  function prepare()
-  {
-    document.removeEventListener('mouseout', _eventHandler);
-    document.addEventListener('mouseout', _eventHandler);
-  }
-
-  prepare();
-}
+);

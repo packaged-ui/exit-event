@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exit Callback</title>
+  <script type="module" src="../dist/exit-event.min.js"></script>
+  <style>
+    iframe {
+      position: absolute;
+      width:    20%;
+      height:   20%;
+    }
+  </style>
+</head>
+<body>
+
+<iframe></iframe>
+
+<script>
+  document.addEventListener('document-exit', (e) =>
+  {
+    console.log('exit', e.detail.positions);
+  });
+</script>
+</body>
+</html>

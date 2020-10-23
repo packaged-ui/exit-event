@@ -1,8 +1,17 @@
 {
-  "name": "@packaged-ui/exit-callback",
-  "version": "0.0.3",
-  "repository": "git@github.com:packaged-ui/exit-callback.git",
+  "name": "@packaged-ui/exit-event",
+  "version": "0.0.1",
+  "repository": "git@github.com:packaged-ui/exit-event.git",
   "author": "Tom Kay <oridan82@gmail.com>",
   "license": "MIT",
-  "main": "src/index.js"
+  "main": "src/index.js",
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "@rollup/plugin-commonjs": "^15.1.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "custom-event": "^1.0.1",
+    "rollup-plugin-terser": "^7.0.2"
+  }
 }

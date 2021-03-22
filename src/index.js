@@ -2,9 +2,10 @@ const CustomEvent = require('custom-event');
 
 let lastUpdate = 0;
 let lastX, lastY = 0;
-document.addEventListener('mousemove', (e) =>
+
+document.addEventListener('mousemove', function (e)
 {
-  if(e.movementX || e.movementY)
+  if(e.x || e.y)
   {
     lastUpdate = Date.now();
     lastX = e.x;
@@ -16,7 +17,7 @@ let threshold = 60;
 
 document.addEventListener(
   'mouseout',
-  (movedEvent) =>
+  function (movedEvent)
   {
     const delay = Date.now() - lastUpdate;
     if(delay === 0 || delay > 50)
@@ -46,7 +47,7 @@ document.addEventListener(
     if((location.length > 0) && (!to))
     {
       const event = new CustomEvent('document-exit', {detail: {positions: location}});
-      document.dispatchEvent(event)
+      document.dispatchEvent(event);
     }
   }
 );

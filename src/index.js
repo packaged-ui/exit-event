@@ -3,7 +3,7 @@ const CustomEvent = require('custom-event');
 let lastUpdate = 0;
 let lastX, lastY = 0;
 
-document.addEventListener('mousemove', function (e)
+document.addEventListener('mousemove', (e) =>
 {
   if(e.x || e.y)
   {
@@ -17,7 +17,7 @@ let threshold = 60;
 
 document.addEventListener(
   'mouseout',
-  function (movedEvent)
+  (movedEvent) =>
   {
     const delay = Date.now() - lastUpdate;
     if(delay === 0 || delay > 50)

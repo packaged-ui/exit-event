@@ -52,7 +52,8 @@ export function ExitSignal(rootElement = document, _threshold = 60)
     'mouseout',
     (movedEvent) =>
     {
-      if(rootElement !== movedEvent.target)
+      const _compareTarget = (movedEvent.relatedTarget === null) ? rootElement : movedEvent.target;
+      if(rootElement !== _compareTarget)
       {
         return;
       }

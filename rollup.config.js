@@ -9,7 +9,6 @@ const defaultCfg = {
   output: {
     file: './dist/exit-event.min.js',
     format: 'iife',
-    name: 'ExitEvent',
   },
   plugins: [
     resolve({browser: true, preferBuiltins: false}),

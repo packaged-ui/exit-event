@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Frame</title>
+  <script src="../dist/exit-event.min.js"></script>
+</head>
+<body>
+
+<script>
+  document.addEventListener('document-exit', (e) =>
+  {
+    console.log('exit frame', e.detail.positions);
+  });
+
+</script>
+</body>
+</html>

@@ -5,16 +5,16 @@ import commonjs from '@rollup/plugin-commonjs';
 process.chdir(__dirname);
 
 const defaultCfg = {
-  input: './src/index.js',
+  input: './src/event.js',
   output: {
     file: './dist/exit-event.min.js',
-    format: 'iife'
+    format: 'iife',
   },
   plugins: [
     resolve({browser: true, preferBuiltins: false}),
     commonjs(),
     terser(),
-  ]
+  ],
 };
 
 export default [defaultCfg];
